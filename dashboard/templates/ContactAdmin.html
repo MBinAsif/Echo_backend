@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject }}</title>
+    <head>
+        <!-- Include Font Awesome CDN for Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Sofia Pro, Arial, sans-serif;
+            background-color: #f4f4f4 !important;
+            font-family: 'Sofia Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .logo-container {
+            margin: 0;
+            width: 100%;
+            padding: 30px 0;
+            background-color: #DFEBF6;
+            text-align: center;
+            border-radius: 10px 10px 0px 0px;
+        }
+        .logo {
+            width: 150px; /* Default size */
+            max-width: 100%;
+            height: auto;
+        }
+        .email-container {
+            background: #ffffff !important;
+            border-radius: 10px;
+            box-shadow: 0px 0px 17px rgba(0, 0, 0, .2);
+            text-align: center;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .email-header {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #10164D !important;
+        }
+        .email-body {
+            font-size: 15px;
+            color: #000000 !important;
+            padding: 0px 20px 0px 20px;
+        }
+
+        .email-image {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px; /* Default size */
+            height: auto;
+            border-radius: 5px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #10164D;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .cta-button:hover
+        {
+            transition: linear 190ms;
+            background-color: rgb(185, 184, 184);
+            color: rgb(0, 0, 0);
+        }
+        .links
+        {
+            color: #0d4b7f;
+            font-size: 14px;
+        }
+        .links:hover
+        {
+            transition: linear 190ms;
+            color: #10164D;
+        } 
+        .footer {
+    padding: 20px;
+    background-color: #DFEBF6;
+    color: #10164D;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.footer-left {
+    flex: 1; /* Takes up remaining space */
+    text-align: left;
+}
+
+.footer-left p {
+    margin: 5px 0; /* Adjusts spacing between the lines */
+    font-size: 14px;
+}
+
+.footer-left span {
+    font-weight: bold;
+}
+
+
+.footer-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px; /* Space between icons */
+}
+
+.social-icons a {
+    color: #0d4b7f;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #10164D;
+    transition: linear 190ms; /* Change color on hover */
+}
+
+.footer .copyright {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 90%;
+                padding: 15px;
+            }
+            .logo {
+                width: 120px; /* Smaller on mobile */
+            }
+            .email-image {
+                max-width: 300px; /* Smaller image */
+            }
+            .email-header {
+                font-size: 22px;
+            }
+            .email-body {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="logo-container">
+            <img class="logo" src="{{ image_url }}" alt="Logo">
+        </div>
+
+        {% if image_url %}
+            <img class="email-image" src="{{ image_url }}" alt="Notification Image">
+        {% endif %}
+
+        <div class="email-header">{{ subject }}</div>
+        <p class="email-body">{{ message }}</p>
+
+        {% if is_admin %}
+    <a class="cta-button" href="{{ action_url }}">{{ button_text|default:"Review Request" }}</a>
+{% endif %}
+
+        
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>Need help? <span>Contact us at:</span></p>
+                    <p><a class="links" href="mailto:echotrailhelp@gmail.com">echotrailhelp@gmail.com</a></p>
+                </div>
+                <div class="social-icons footer-right">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="https://yourwebsite.com/facebook-icon.png" alt="Facebook" style="width: 24px; height: 24px;"> 
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img src="https://yourwebsite.com/instagram-icon.png" alt="Instagram" style="width: 24px; height: 24px;">
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank">
+                        <img src="https://yourwebsite.com/twitter-icon.png" alt="Twitter" style="width: 24px; height: 24px;">
+                    </a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 EchoTrail Pakistan. All rights reserved.</p>
+        </div>
+        
+        
+    </div>
+</body>
+</html>
