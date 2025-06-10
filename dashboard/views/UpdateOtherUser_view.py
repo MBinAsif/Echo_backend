@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from ..models import User  # Change AdminUser to User
+from accounts.models import User
 from django.conf import settings
 import bcrypt
 import jwt

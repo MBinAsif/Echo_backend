@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 import jwt
 from django.conf import settings
-from ..models import User  # Assuming you have a User model
+from accounts.models import User # Assuming you have a User model
 from .ContactAdmin_view import delete_user as notify_user_deletion
 
 

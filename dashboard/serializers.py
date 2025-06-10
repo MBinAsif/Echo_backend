@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import AdminUser, User, Alarm, BatteryMonitoring, BeltTracking
+from accounts.models import User, User, Alarm, BatteryMonitoring, BeltTracking
 
 
 class AdminUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdminUser
+        model = User
         fields = '__all__'
         extra_kwargs = {
             'password': {'write_only': True}
@@ -12,7 +12,7 @@ class AdminUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
-        admin = AdminUser(**validated_data)
+        admin = User(**validated_data)
         if password:
             admin.set_password(password)
         admin.save()

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from ..models import User  # Assuming you have a User model
+from accounts.models import User
 import bcrypt
 from .ContactAdmin_view import create_user
 

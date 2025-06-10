@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
-from ..models import AdminUser
+from accounts.models import User
 from .utils.tokenvalidation import validate_token  # Import the validation function
 from rest_framework.exceptions import AuthenticationFailed
 import traceback
@@ -19,8 +19,8 @@ def logout_admin(request):
 
         # Attempt to retrieve the admin user from the database
         try:
-            admin_user = AdminUser.objects.get(id=admin_id)
-        except AdminUser.DoesNotExist:
+            admin_user = User.objects.get(id=admin_id)
+        except User.DoesNotExist:
             return JsonResponse({"error": "Admin not found"}, status=404)
 
         # Update admin status to inactive

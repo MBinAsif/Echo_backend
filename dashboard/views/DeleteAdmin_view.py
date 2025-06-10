@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 import jwt
 from django.conf import settings
-from ..models import AdminUser
+from accounts.models import User
 from .ContactAdmin_view import delete_admin as notify_admin_deletion
 
 
@@ -25,7 +25,7 @@ def delete_admin(request):
         if not logged_in_admin_id:
             return Response({"error": "Invalid token payload"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        logged_in_admin = AdminUser.objects.filter(id=logged_in_admin_id).first()
+        logged_in_admin = User.objects.filter(id=logged_in_admin_id).first()
         if not logged_in_admin:
             return Response({"error": "Admin not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -34,7 +34,7 @@ def delete_admin(request):
         if not target_admin_id:
             return Response({"error": "Admin ID is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-        target_user = AdminUser.objects.filter(id=target_admin_id).first()
+        target_user = User.objects.filter(id=target_admin_id).first()
         if not target_user:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 

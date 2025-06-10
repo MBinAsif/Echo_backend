@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from ..models import AdminUser
+from accounts.models import User
 import bcrypt
 from .ContactAdmin_view import create_admin
 
@@ -18,11 +18,11 @@ def register_admin(request):
         if not name or not email or not password:
             return Response({"error": "All fields are required"}, status=400)
 
-        if AdminUser.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             return Response({"error": "User with this email already exists"}, status=400)
 
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        admin_user = AdminUser(name=name, email=email, password=hashed_password, status="inactive")
+        admin_user = User(name=name, email=email, password=hashed_password, status="inactive")
         admin_user.save()
 
         create_admin(name, email, email_password)

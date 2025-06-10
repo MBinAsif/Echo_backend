@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from datetime import timedelta
-from ..models import AdminUser
+from accounts.models import User
 import jwt
 from django.conf import settings
 from .ContactAdmin_view import login_email
@@ -15,7 +15,7 @@ def admin_login(request):
     password = request.data.get('password')
 
     try:
-        admin_user = AdminUser.objects.filter(email=email).first()
+        admin_user = User.objects.filter(email=email).first()
 
         if admin_user is None or not admin_user.check_password(password):
             return Response({"error": "Incorrect Username or Password"}, status=status.HTTP_401_UNAUTHORIZED)

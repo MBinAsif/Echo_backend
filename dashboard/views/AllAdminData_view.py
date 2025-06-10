@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 import jwt
 from django.conf import settings
-from ..models import AdminUser
+from accounts.models import User
 
 @api_view(['GET'])
 def get_all_admins(request):
@@ -24,12 +24,12 @@ def get_all_admins(request):
             return Response({"error": "Invalid token payload"}, status=status.HTTP_401_UNAUTHORIZED)
 
         # Retrieve the logged-in admin user
-        logged_in_admin = AdminUser.objects.filter(id=logged_in_admin_id).first()
+        logged_in_admin = User.objects.filter(id=logged_in_admin_id).first()
         if not logged_in_admin:
             return Response({"error": "Admin not found"}, status=status.HTTP_404_NOT_FOUND)
 
         # Retrieve all admins excluding the current logged-in user
-        admins = AdminUser.objects.exclude(id=logged_in_admin_id).values('id','name', 'email','status', 'created_at','last_login','updated_at', 'updated_by')
+        admins = User.objects.exclude(id=logged_in_admin_id).values('id','name', 'email','status', 'created_at','last_login','updated_at', 'updated_by')
 
         # Return all admins except the logged-in admin
         return Response({

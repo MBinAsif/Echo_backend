@@ -5,7 +5,7 @@ from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 import json
-from ..models import AdminUser  
+from accounts.models import User 
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.validators import validate_email
@@ -26,7 +26,7 @@ def send_contact_admin(request):
 
             
 
-            admin_emails = AdminUser.objects.filter(email__in=[your_email, admin_email]).values_list('email', flat=True)
+            admin_emails = User.objects.filter(email__in=[your_email, admin_email]).values_list('email', flat=True)
             if your_email not in admin_emails or admin_email not in admin_emails:
                 return JsonResponse({'contact message': 'One or both emails are not registered admins.'}, status=403)
 

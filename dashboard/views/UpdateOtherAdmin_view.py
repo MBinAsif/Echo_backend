@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from ..models import AdminUser
+from accounts.models import User
 from django.conf import settings
 import bcrypt
 import jwt
@@ -13,8 +13,8 @@ SECRET_KEY = settings.SECRET_KEY
 @api_view(['PATCH'])
 def update_other_admin(request, id):
     try:
-        admin_user = AdminUser.objects.get(id=id)
-    except AdminUser.DoesNotExist:
+        admin_user = User.objects.get(id=id)
+    except User.DoesNotExist:
         return Response({"error": "Admin user not found"}, status=status.HTTP_404_NOT_FOUND)
 
     # Extract updated_by from refresh_token

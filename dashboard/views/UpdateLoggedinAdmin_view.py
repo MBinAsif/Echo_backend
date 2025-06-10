@@ -6,7 +6,7 @@ from django.conf import settings
 from datetime import timedelta
 from bcrypt import hashpw, gensalt
 from django.utils import timezone
-from ..models import AdminUser
+from accounts.models import User
 from .ContactAdmin_view import update_loggedin_email
 
 @api_view(['PATCH'])
@@ -25,7 +25,7 @@ def update_loggedin_admin(request):
         token_email = payload['email']  # Extract the email from the token
 
         # Retrieve the user from the AdminUser table using the custom model
-        user = AdminUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
 
         # Verify if the email in the token matches the email in the databas
 
@@ -96,7 +96,7 @@ def update_loggedin_admin(request):
         return Response({"error": "Token has expired"}, status=status.HTTP_401_UNAUTHORIZED)
     except jwt.InvalidTokenError:
         return Response({"error": "Invalid token"}, status=status.HTTP_401_UNAUTHORIZED)
-    except AdminUser.DoesNotExist:
+    except User.DoesNotExist:
         return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

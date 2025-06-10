@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 import jwt
 from django.conf import settings
-from ..models import User, AdminUser, Alarm, BatteryMonitoring, BeltTracking
+from accounts.models import User, AdminUser, Alarm, BatteryMonitoring, BeltTracking
 from django.db.models import CharField, F, Value
 from django.db.models.functions import Concat
 
