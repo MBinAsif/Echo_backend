@@ -78,7 +78,7 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 **Development:**
 
 ```bash
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
 ```
 
 **Production (example using Gunicorn):**
